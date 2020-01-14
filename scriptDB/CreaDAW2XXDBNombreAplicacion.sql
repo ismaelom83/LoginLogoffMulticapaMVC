@@ -7,36 +7,27 @@
 -- ProyectoTema5 || LoginLogoffTema5 || MtoDepartamentosPDOTema5 --
 
 -- Crear base de datos --
-    CREATE DATABASE if NOT EXISTS DAW209DBProyectoTema5;
+    CREATE DATABASE if NOT EXISTS DAW209DBproyectoLoginLogoffMulticapaPOO;
 -- Uso de la base de datos. --
-    USE DAW209DBProyectoTema5;
+    USE DAW209DBproyectoLoginLogoffMulticapaPOO;
 
 -- Crear tablas. --
-    CREATE TABLE IF NOT EXISTS Departamento(
-        CodDepartamento varchar(3) PRIMARY KEY,
-        DescDepartamento varchar(255) NOT null,
-        FechaBajaDepartamento int DEFAULT null, -- Valor por defecto null, ya que cuando lo creas no puede estar de baja logica
-        FechaCreacionDepartamento int NOT null,
-        VolumenNegocio float NOT null
-    );
-
-    CREATE TABLE IF NOT EXISTS Usuario(
-        CodUsuario varchar(15) PRIMARY KEY,
-        DescUsuario varchar(250) NOT null,
-        Password varchar(64) NOT null,
-        Perfil enum('administrador', 'usuario') default 'usuario', -- Valor por defecto usuario
-        NumConexiones integer(11),
-        FechaHoraUltimaConexion timestamp, --Revisar o cambiar a int--
-        ImagenUsuario mediumblob
+    CREATE TABLE IF NOT EXISTS T01_Usuarios(
+        T01_CodUsuario varchar(15) PRIMARY KEY,
+        T01_DescUsuario varchar(250) NOT null,
+        T01_Password varchar(64) NOT null,
+        T01_Perfil enum('administrador', 'usuario') default 'usuario', -- Valor por defecto usuario
+        T01_NumAccesos integer(11),
+        T01_FechaHoraUltimaConexion timestamp --Revisar o cambiar a int--
     );
 
 -- Crear del usuario --
-    CREATE USER IF NOT EXISTS 'usuarioDAW209DBProyectoTema5'@'%' identified BY 'paso'; 
+    CREATE USER IF NOT EXISTS 'usuarioDAW209DBLoginPOO'@'%' identified BY 'paso'; 
 
 
 
 -- Dar permisos al usuario --
-    GRANT ALL PRIVILEGES ON DAW209DBProyectoTema5.* TO 'usuarioDAW209DBProyectoTema5'@'%'; 
+    GRANT ALL PRIVILEGES ON DAW209DBproyectoLoginLogoffMulticapaPOO.* TO 'usuarioDAW209DBLoginPOO'@'%'; 
 
 -- Hacer el flush privileges, por si acaso --
     FLUSH PRIVILEGES;

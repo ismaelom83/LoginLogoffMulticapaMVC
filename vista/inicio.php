@@ -67,7 +67,7 @@
             <!-- Copyright -->
 
             <div class="footer-copyright text-center py-3"> <a href="../../../index.php">© 2019 Copyright: Ismael Heras Salvador</a> 
-                <a href="http://daw-usgit.sauces.local/heras/proyectoTema5/tree/developer"><img  src="../img/gitLab.png" alt=""></a>
+                <a href="http://daw-usgit.sauces.local/heras/LoginLogoffMulticapaMVC/tree/master"><img  src="../img/gitLab.png" alt=""></a>
                 <a href="https://github.com/ismaelom83/LoginLogoffMulticapaMVC"><img  src="../img/gitHub.png" alt=""></a>
             </div>
 

@@ -4,19 +4,11 @@
  */
 -- La contraseña de los usuarios, es el codUsuario concatenado con el password, en este caso paso. [$usuario . $pass]
 -- Base de datos a usar
-USE DAW209DBProyectoTema5;
+USE DAW209DBproyectoLoginLogoffMulticapaPOO;
 
--- Introduccion de datos dentro de la tabla creada
-INSERT INTO Departamento(CodDepartamento,DescDepartamento,FechaCreacionDepartamento, VolumenNegocio) VALUES
-    ('INF', 'Departamento de informatica',1574772123, 50),
-    ('VEN', 'Departamento de ventas',1574772123, 800000),
-    ('CON', 'Departamento de contabilidad',1574772123, 900000),
-    ('MAT', 'Departamento de matematicas',1574772123, 80000000),
-    ('CAT', 'Departamento de gatos',1574772123, 12584631268);
--- 1574772123 -> 26-nov-2019 ~13:45 --
 
 -- El tipo de usuario es "usuario" como predeterminado, despues añado un admin --
-INSERT INTO Usuario(CodUsuario, DescUsuario, Password,NumConexiones) VALUES
+INSERT INTO T01_Usuarios(T01_CodUsuario, T01_DescUsuario, T01_Password,T01_NumAccesos) VALUES
     ('daniel','Daniel Alcala',SHA2('danielpaso',256),0),
     ('nereaA','Nerea Alvarez',SHA2('nereaApaso',256),0),
     ('miguel','Miguel Aranda',SHA2('miguelpaso',256),0),
@@ -35,4 +27,4 @@ INSERT INTO Usuario(CodUsuario, DescUsuario, Password,NumConexiones) VALUES
     ('antonio','Antonio Janez',SHA2('antoniopaso',256),0);
 
 -- Usuario con el rol admin --
-INSERT INTO Usuario(CodUsuario, DescUsuario, Password, NumConexiones,Perfil) VALUES ('admin','admin',SHA2('adminpaso',256),0, 'administrador');
+INSERT INTO T01_Usuarios(T01_CodUsuario, T01_DescUsuario, T01_Password,T01_NumAccesos,T01_Perfil) VALUES ('admin','admin',SHA2('adminpaso',256),0, 'administrador');
