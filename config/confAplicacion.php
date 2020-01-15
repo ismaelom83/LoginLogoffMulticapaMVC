@@ -1,18 +1,24 @@
 <?php
+//requerimos la libreria de validacion.
+require_once '../core/validacionFormularios.php';
 
-//requerimos la configuracion de la base de datos
-require_once 'confDB.php';
+//incluyo las clases del modelo
+require_once 'modelo/Usuario.php';
+require_once 'modelo/UsuarioPDO.php';
+require_once 'modelo/DBPDO.php';
 
-//nos conectamos  ala base de datos
-  try {
-        //conexion a la base de datos.
-        $miBD = new PDO(MAQUINA, USUARIO, PASSWD);
-        $miBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //try cacth por si falla la conexion.
-    } catch (PDOException $excepcionPDO) {
-        die("Error al conectarse a la base de datos");
-    }
+//creamos los arrays para acceder a las vistas y a los controladores
 
+$controladores = [
+    'login' => 'controller/cLogin.php',
+    'inicio' => 'controller/cInicio.php'
+];
+
+$vistas = [
+    'layout' => 'view/layout.php',
+    'login' => 'view/vLogin.php',
+    'inicio' => 'view/vInicio.php'
+];
 
 ?>
 
