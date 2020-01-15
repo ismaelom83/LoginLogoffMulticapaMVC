@@ -38,16 +38,8 @@ if (isset($_POST['entrar']) && $_POST['entrar'] == 'Entrar') {
     $usuario = $aFormulario['usuario'] = $_POST['usuario'];
     $passwd = $aFormulario['password'] = $_POST['password'];
 
-    try {
-        //conexion a la base de datos.
-        $miBD = new PDO(MAQUINA, USUARIO, PASSWD);
-        $miBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //try cacth por si falla la conexion.
-    } catch (PDOException $excepcionPDO) {
-        die("Error al conectarse a la base de datos");
-    }
+}
 
-//si se envia el formulario este desaparece.
 ?>  
 <!DOCTYPE html>
 <html lang="es">
