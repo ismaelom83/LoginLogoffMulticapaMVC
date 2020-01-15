@@ -47,55 +47,6 @@ if (isset($_POST['entrar']) && $_POST['entrar'] == 'Entrar') {
         die("Error al conectarse a la base de datos");
     }
 
-    try {
-        //funcion para poner la hora en madrid
-        date_default_timezone_set("Europe/Madrid");
-        //almacenamos en una variable la instancicocion de datatime.
-        $fechaNacional = date('d-m-Y H:i:s');
-        //con este query buscamos en la base de datos
-        $SQL = "SELECT * FROM Usuario WHERE CodUsuario = :user AND Password = :hash";
-        //almacenamos en una variable (objeto PDOestatement) la consulta preparada
-        $oPDO = $miBD->prepare($SQL);
-        //blindeamos los parametros
-        $oPDO->bindValue(':user', $usuario);
-        //la contraseña es paso, pero para resumirla -> sha + contraseña=concatenacion de nombre+password
-        $oPDO->bindValue(':hash', hash('sha256', $usuario . $passwd));
-        $oPDO->execute();
-        //almacenamos todos los datos de la consulta en un array para mostar por pantalla luego los datos del registro e l asesion del usuario.
-        $resultado = $oPDO->fetch(PDO::FETCH_ASSOC);
-
-        //recorremos todos los campos de la base de datos y si coincide en uno ejecuta el if y nos redireciona
-        //a la pagina programa.php, si no ejecuta el else i nos dice que el usuario no es correcto
-        //que no existe el usuario.
-        if ($oPDO->rowCount() == 1) {
-            session_start();
-            //almacenamos en la sesion los campos que queramos mostrar de la base de datos del usuario
-            $_SESSION['usuarioDAW209AppLOginLogoff'] = $resultado['CodUsuario'];
-            $_SESSION['descripcionDAW209AppLOginLogoff'] = $resultado['DescUsuario'];
-            $_SESSION['perfilDAW209AppLOginLogoff'] = $resultado['Perfil'];
-            $_SESSION['numeroConexiones'] = $resultado['NumConexiones'] + 1;
-            
-            if ($_SESSION['numeroConexiones'] > 1) {//si el numero de conexiones es mayor de una entonces mostraremos la hora de la ultima conexion si no no podriamos al ser la primera
-                $_SESSION['ultimaConexion'] = $resultado['FechaHoraUltimaConexion'];        
-            }
-            //consulta preparada para saber el numero de conexiones y lo almacenamos en la base datos.
-            $sql = "UPDATE Usuario SET NumConexiones=NumConexiones+1 WHERE CodUsuario=:codUsuario";
-            //guardamos en una variable la sentencia sql
-            $oPDO = $miBD->prepare($sql);
-            $oPDO->bindParam(":codUsuario", $_SESSION['usuarioDAW209AppLOginLogoff']);
-            $oPDO->execute();
-            //con header nos redirreciona a programa.php        
-            header('Location: codigoPHP/programa.php');
-        }
-        //cath que se ejecuta si habido un error
-    } catch (PDOException $excepcion) {
-        echo "<h1>Se ha producido un error</h1>";
-        //nos muestra el error que ha ocurrido.
-        echo $excepcion->getMessage();
-    } finally {
-        unset($miBD); //cerramos la conexion a la base de datos.
-    }
-}
 //si se envia el formulario este desaparece.
 ?>  
 <!DOCTYPE html>
@@ -131,7 +82,9 @@ if (isset($_POST['entrar']) && $_POST['entrar'] == 'Entrar') {
                         <a href="<?php echo $_SERVER['PHP_SELF'] ?>?idioma=english"><img src="../WEBBROOT/img/eng.jpg" alt="English"></a>
                         <a href="<?php echo $_SERVER['PHP_SELF'] ?>?idioma=castellano"><img src="../WEBBROOT/img/esp_1.jpg" alt="Castellano"></a>
                     </li>
-
+                    <div>
+                        <p>LoginLogoffMulticapaPOO</p>
+                    </div>
                 </ul >
             </div>
         </nav>            
@@ -182,13 +135,10 @@ if (isset($_POST['entrar']) && $_POST['entrar'] == 'Entrar') {
             <br/>
             <br/>         
         </main>
-        <footer class="page-footer font-small blue load-hidden">
-            <div class="footer-copyright text-center py-3"> <a href="../../../index.php">© 2019 Copyright: Ismael Heras Salvador</a> 
-                <a href="http://daw-usgit.sauces.local/heras/LoginLogoffMulticapaMVC/tree/master"><img  src="../WEBBROOT/img/gitLab.png" alt=GitLab""></a>
-                <a href="https://github.com/ismaelom83/LoginLogoffMulticapaMVC"><img  src="../WEBBROOT/img/gitHub.png" alt="GitHub"></a>
-                <a href="../index.php">Salir De La Aplicacion</a> 
-            </div>
-        </footer> 
+        <?php
+        //requerimos el footer al layout
+        require_once 'Layout.php';
+        ?>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

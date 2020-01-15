@@ -52,45 +52,28 @@
             <h1 class="bienvenido">Bienvenido al incio de la aplicacion loginlogoffMulticapaMVC de Ismael Heras Salvador</h1>
           
             <div class="login-1">
-                <a href="login.php" >Ir al login</a>
+                <a href="vlogin.php" >Ir al login</a>
             </div>
             
                <div class="login-1">
                 <a href="" >Ir al registro(en construccion)</a>
             </div>
-            
-             
-                         
+                   <?php
+                   require_once '../modelo/DBPDO.php';
+                   $consulta = new DBPDO();
+                   
+                 echo  $consulta->ejecutarConsulta();
+              
+                   ?>                
         </main>
-        <!-- Footer -->
-        <footer class="page-footer font-small blue  ">
-            <!-- Copyright -->
 
-            <div class="footer-copyright text-center py-3"> <a href="../../../index.php">© 2019 Copyright: Ismael Heras Salvador</a> 
-                <a href="http://daw-usgit.sauces.local/heras/LoginLogoffMulticapaMVC/tree/master"><img  src="../img/gitLab.png" alt=""></a>
-                <a href="https://github.com/ismaelom83/LoginLogoffMulticapaMVC"><img  src="../img/gitHub.png" alt=""></a>
-            </div>
-
-            <!-- Copyright -->
-        </footer>
-        <!-- Footer -->
-<!--        <script src='../../js/scrollreveal.min.js'></script>-->
+        <?php
+        //requerimos el footer al layout
+        require_once 'Layout.php';
+        ?>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<!--          <script>
-        window.sr = ScrollReveal();
-        sr.reveal('.navbar, .page-footer', {
-            duration: 2000,
-            origin: 'bottom',
-            distance:  '600px'
-        });
-          sr.reveal('.list-group', {
-            duration: 3000,
-            origin: 'top',
-            distance: '100px'
-        });         
-        </script>-->
     </body>
 </html>
 

@@ -54,7 +54,7 @@
 
             <ul class="list-group">
                 <div >
-                    <p class="parrafo1">proyecto loginlogoff multicapa MVC</p><a class="text-decoration-none" href="vista/inicio.php"><p class="mostar">Ir al inicio del login</p ></a>
+                    <p class="parrafo1">proyecto loginlogoff multicapa MVC</p><a class="text-decoration-none" href="vista/vinicio.php"><p class="mostar">Ir al inicio</p ></a>
                     <hr>
                 </div>
             </ul>              
@@ -64,8 +64,8 @@
             <!-- Copyright -->
 
             <div class="footer-copyright text-center py-3"> <a href="../../../index.php">© 2019 Copyright: Ismael Heras Salvador</a> 
-                <a href="http://daw-usgit.sauces.local/heras/LoginLogoffMulticapaMVC/tree/master"><img  src="img/gitLab.png" alt=""></a>
-                <a href="https://github.com/ismaelom83/LoginLogoffMulticapaMVC"><img  src="img/gitHub.png" alt=""></a>
+                <a href="http://daw-usgit.sauces.local/heras/LoginLogoffMulticapaMVC/tree/master"><img  src="WEBBROOT/img/gitLab.png" alt=""></a>
+                <a href="https://github.com/ismaelom83/LoginLogoffMulticapaMVC"><img  src="WEBBROOT/img/gitHub.png" alt=""></a>
             </div>
 
             <!-- Copyright -->
