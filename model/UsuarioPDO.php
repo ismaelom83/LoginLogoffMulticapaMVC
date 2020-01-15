@@ -1,55 +1,26 @@
 <?php
 
+class UsuarioPDO {
 
-require_once '../controlador/clogin.php';
+    public function validarUsuario($codUsuario, $password) {
 
-$codUsuario = $resultado['T01_CodUsuario'];
-$passwor = $resultado['T01_Password'];
+        $consulta = "select * from T01_Usuarios where T01_CodUsuario=? and T01_Password=?"; //Creacion de la consulta.
+        $arrayUsuarios = [];
+        $resConsulta = DBPDO::ejecutaConsulta($consulta, [$codUsuario, $password]); //Ejecutamos la consulta.
+        if ($resConsulta->rowCount() == 1) { //Comprobamos si se han obtenido resultados en la consulta.
+            $resFetch = $resConsulta->fetchObject();
 
-class UsuarioPDO  implements UsuarioDB{
-  
-   
-    
-  
-    public function validarUsuario(entrada $codUsuario, entrada $passwor) {
-        require_once 'DBPDO.php';
-        require_once '../vista/vlogin.php';
-        
-        $sentencia =  new DBPDO();
-        $sentencia->ejecutarConsulta();
-        
-        try{
-          if ($oPDO->rowCount() == 1) {
-            session_start();
-            //almacenamos en la sesion los campos que queramos mostrar de la base de datos del usuario
-            $_SESSION['usuarioDAW209AppLOginLogoffMulticapaPOO'] = $resultado['TO1_CodUsuario'];
-            $_SESSION['descripcionDAW209AppLOginLogoffMulticapaPOO'] = $resultado['TO1_DescUsuario'];
-            $_SESSION['perfilDAW209AppLOginLogoff'] = $resultado['TO1_Perfil'];
-            $_SESSION['numeroConexiones'] = $resultado['T01_NumAccesos'] + 1;
-
-            if ($_SESSION['numeroConexiones'] > 1) {//si el numero de conexiones es mayor de una entonces mostraremos la hora de la ultima conexion si no no podriamos al ser la primera
-                $_SESSION['ultimaConexion'] = $resultado['T01_FechaHoraUltimaConexion'];
-            }
-            //consulta preparada para saber el numero de conexiones y lo almacenamos en la base datos.
-            $sql = "UPDATE Usuario SET T01_NumAccesos=NumConexiones+1 WHERE TO1_CodUsuario=:codUsuario";
-            //guardamos en una variable la sentencia sql
-            $oPDO = $miBD->prepare($sql);
-            $oPDO->bindParam(":codUsuario", $_SESSION['usuarioDAW209AppLOginLogoffMulticapaPOO']);
-            $oPDO->execute();
-            //con header nos redirreciona a programa.php        
-            header('Location: vinicio.php');
+            $arrayUsuarios['CodUsuario'] = $resFetch->T01_CodUsuario;
+        $_SESSION['descUsuario'] = $arrayUsuarios['DescUsuario'] = $resFetch->T01_DescUsuario;
+            $arrayUsuarios['Password'] = $resFetch->T01_Password;
+            $arrayUsuarios['Perfil'] = $resFetch->T01_Perfil;
+            $arrayUsuarios['ContadorAccesos'] = $resFetch->T01_NumAccesos;
+            $arrayUsuarios['UltimaConexion'] = $resFetch->T01_FechaHoraUltimaConexion;
+            
         }
-        //cath que se ejecuta si habido un error
-    } catch (PDOException $excepcion) {
-        echo "<h1>Se ha producido un error</h1>";
-        //nos muestra el error que ha ocurrido.
-        echo $excepcion->getMessage();
-    } finally {
-        unset($miBD); //cerramos la conexion a la base de datos.
-    }
+        return $arrayUsuarios;
     }
 
 }
-
 ?>
 

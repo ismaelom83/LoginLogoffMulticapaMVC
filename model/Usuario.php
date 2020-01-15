@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 class Usuario{
     
     private $codUsuario;
@@ -66,7 +69,14 @@ class Usuario{
         $this->contadorAccesos = $contadorAccesos;
     }
 
-
+  public static function validarUsuario($codUsuario, $password) {
+        $usuario = null;
+        $aUsuario = UsuarioPDO::validarUsuario($codUsuario, $password);
+        if (!empty($aUsuario)) {
+            $usuario = new Usuario($codUsuario, $aUsuario["DescUsuario"], $aUsuario["Password"], $aUsuario["Perfil"],$aUsuario["ContadorAccesos"], $aUsuario["UltimaConexion"]);
+        }
+        return $usuario;
+    }
 
 }
 
